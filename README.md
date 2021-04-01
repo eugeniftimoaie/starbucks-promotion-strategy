@@ -9,19 +9,17 @@ It asks and answers following business questions:
 4. Are there significant differences in age, income and registration date for promotion success?
 5. Can we build a classification model to predict promotional offer success for new customers based on their demographical data age, income, registration date and gender?
 
-A blog post with the results can be found on [medium](https://medium.com/).
+A blog post with the results can be found on [medium](https://eugen-iftimoaie.medium.com/how-to-schedule-a-smart-promotional-strategy-for-starbucks-using-machine-learning-58a6db031e8e).
 
 ## Configuration
-* Jupyter notebook environment based on python 3.8 with libraries pandas, numpy, json, datetime, joblib, matplotlib.pyplot and sklearn
+Jupyter notebook environment based on python 3.8 with libraries pandas, numpy, json, datetime, joblib, matplotlib.pyplot and sklearn
 
 ## Installation on local computer
 Download zip folder on local computer, extract files and open "Starbucks_Capstone_notebook.ipynb" with jupyter notebook.
 
 ## File Manifest
 Below you can find the file content of this project:
-
 <pre><code class="lang-txt">
-
       - data
       |- portfolio.json (json file with data to process)
       |- profile.json (json file with data to process)
@@ -31,7 +29,6 @@ Below you can find the file content of this project:
       - README.md (markdown file with instructions)
       - Starbucks_Capstone_notebook.ipynb (jupyter notebook file with analysis)
       - Starbucks_Capstone_notebook.html (html file with analysis)
-
 </code></pre>
 
 ## Copyright and Licencing

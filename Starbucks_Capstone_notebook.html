@@ -18682,10 +18682,10 @@ Wall time: 1min 23s
 <p><p>Evaluation metric comparison table between classification algorithms - Offer 2:</p>
 <ul>
     <li>The output of the classification is roughly balanced for the algorithms LogR, SVM, DT, RF and KNN as Precision, Recall and F1 scores are roughly equal</li>
-    <li>The highest Accuracy score in a similar range have the algorithms DT, KNN, RF and SVM (from top to bottom)</li>
-    <li>The highest F1 score in a similar range have the algorithms KNN, DT, SVM and RF (from top to bottom)</li>
+    <li>The highest Accuracy score in a similar range have the algorithms RF and DT(from top to bottom)</li>
+    <li>The highest F1 score in a similar range have the algorithms RF, KNN and DT (from top to bottom)</li>
     <li>The Recall is higher than the Precision score only for algorithm KNN</li> 
-</ul><p><p><b>We select KNN as classification algorithm with best predictive performance!</b> KNN has a roughly balanced output with an Accuracy score nearby the highest score (DT) and has as single algorithm the Recall higher than the Precision score.</p>
+</ul><p><p><b>We select RF as classification algorithm with best predictive performance!</b> RF has a roughly balanced output with the highest Accuracy score. The Recall is not higher than the Precision score. KNN has as single algorithm the Recall higher than the Precision score. Due to the fact that the Accuracy of KNN is much lower than of RF we select RF.</p>
 
 </div>
 </div>
@@ -19290,7 +19290,7 @@ Wall time: 1min 23s
 <p><p>Evaluation metric comparison table between classification algorithms - Offer 7:</p>
 <ul>
     <li>The output of the classification is roughly balanced for only the algorithm GNB as Precision, Recall and F1 scores are roughly equal</li>
-    <li>The highest Accuracy score in a similar range have all algorithms RF, SVM, KNN, LogR, DT and GNB (from top to bottom)</li>
+    <li>The highest Accuracy score in a similar range have all algorithms SVM, KNN, LogR, DT and GNB (from top to bottom)</li>
     <li>The highest F1 score in a similar range have the algorithms LogR, KNN, SVM, RF, DT, GNB (from top to bottom)</li>
     <li>The Recall is higher than the Precision score for all algorithms</li> 
 </ul><p><p><b>We select GNB as classification algorithm with best predictive performance!</b> GNB has as single algorithm a roughly balanced output with an Accuracy nearby the highest Accuracy score (KNN). Furthermore the F1 score is also nearby the highest F1 score (LogR) and the Recall is higher than the Precision score.</p>
@@ -19611,13 +19611,13 @@ Wall time: 1min 23s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### best parameters of selected classification algorithms from cross validated grid-search with GridSearchCV</span>
 <span class="n">display</span><span class="p">(</span><span class="s2">&quot;Best parameters (GridSearchCV)&quot;</span><span class="p">,</span> 
         <span class="s2">&quot;Offer 1: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rf_1</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
-       <span class="s2">&quot;Offer 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">knn_2</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
+       <span class="s2">&quot;Offer 2: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rf_2</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
        <span class="s2">&quot;Offer 4: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rf_4</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
        <span class="s2">&quot;Offer 5: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt_5</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
        <span class="s2">&quot;Offer 6: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">svm_6</span><span class="o">.</span><span class="n">best_params_</span><span class="p">),</span>
@@ -19668,7 +19668,7 @@ Wall time: 1min 23s
 
 
 <div class="output_text output_subarea ">
-<pre>&#34;Offer 2: {&#39;metric&#39;: &#39;manhattan&#39;, &#39;n_neighbors&#39;: 150, &#39;p&#39;: 0.5, &#39;weights&#39;: &#39;distance&#39;}&#34;</pre>
+<pre>&#34;Offer 2: {&#39;bootstrap&#39;: True, &#39;max_depth&#39;: 6, &#39;max_features&#39;: 2, &#39;min_samples_leaf&#39;: 1, &#39;min_samples_split&#39;: 5, &#39;n_estimators&#39;: 20}&#34;</pre>
 </div>
 
 </div>
@@ -19761,14 +19761,1304 @@ Wall time: 1min 23s
 <p><p>The result of the modeling gives us a classification algorithm with best predictive performance according to our needs for each individual offer data set. These are summaried as follows including the parameters of the estimator which were optimized by cross-validated grid-search (GridSearchCV):</p>
 <ul>
     <li>offer 1: <b>RF</b> <i>{'bootstrap': True, 'max_depth': 6, 'max_features': 2, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 20}</i></li>
-    <li>offer 2: <b>KNN</b> <i>{'metric': 'manhattan', 'n_neighbors': 150, 'p': 0.5, 'weights': 'distance'}</i></li>
+    <li>offer 2: <b>RF</b> <i>{'bootstrap': True, 'max_depth': 6, 'max_features': 2, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 20}</i></li>
     <li>offer 4: <b>RF</b> <i>{'bootstrap': True, 'max_depth': 6, 'max_features': 2, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 20}</i></li>
     <li>offer 5: <b>DT</b> <i>{'criterion': 'entropy', 'max_depth': None, 'max_features': 0.5, 'min_samples_leaf': 50, 'min_samples_split': 100}</i></li>
     <li>offer 6: <b>SVM</b> <i>{'C': 10, 'gamma': 1, 'kernel': 'rbf'}</i></li>
     <li>offer 7: <b>GNB</b> <i>{}</i></li>
     <li>offer 9: <b>KNN</b> <i>{'metric': 'manhattan', 'n_neighbors': 150, 'p': 0.5, 'weights': 'distance'}</i></li>
     <li>offer 10: <b>RF</b> <i>{'bootstrap': True, 'max_depth': 6, 'max_features': 2, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 20}</i></li>
-</ul><p>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="5.5-Effect-of-Hyperparameter-Tuning">5.5 Effect of Hyperparameter Tuning<a class="anchor-link" href="#5.5-Effect-of-Hyperparameter-Tuning">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>In this chapter we measure the effect of hyperparameter tuning by cross-validated grid-search (GridSearchCV). Here we compare the computed metrics Accuracy, F1 score, Recall and Precision once for best parameters (using GridSearchCV) and once for default parameters. The outcome is a percentage of how much the model performed better using GridSearchCV.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.1-offer-1">5.5.1 offer 1<a class="anchor-link" href="#5.5.1-offer-1">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">RF</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">RF</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">rf_1_d</span><span class="p">,</span> <span class="n">acc_rf_1_d</span><span class="p">,</span> <span class="n">f1_rf_1_d</span><span class="p">,</span> <span class="n">r_rf_1_d</span><span class="p">,</span> <span class="n">p_rf_1_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X1_train</span><span class="p">,</span> <span class="n">X1_test</span><span class="p">,</span> <span class="n">y1_train</span><span class="p">,</span> <span class="n">y1_test</span><span class="p">)</span>
+<span class="n">rf_1_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_rf_1_d</span><span class="p">,</span> <span class="n">f1_rf_1_d</span><span class="p">,</span> <span class="n">r_rf_1_d</span><span class="p">,</span> <span class="n">p_rf_1_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_1_RF</span> <span class="o">=</span> <span class="n">offer_1</span><span class="p">[[</span><span class="s2">&quot;RF&quot;</span><span class="p">]]</span>
+<span class="n">offer_1_RF</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_1_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf_1_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_1_RF</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_1_RF</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_1_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 1 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_1_RF</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 1 - confusion matrix:
+[[358 220]
+ [196 339]] 
+
+Offer 1 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.65      0.62      0.63       578
+           1       0.61      0.63      0.62       535
+
+    accuracy                           0.63      1113
+   macro avg       0.63      0.63      0.63      1113
+weighted avg       0.63      0.63      0.63      1113
+
+Offer 1: Accuracy: 62.62 % | F1-score: 61.97 % 
+        Recall: 63.36 % | Precision: 60.64 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 1 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>66.04</td>
+      <td>62.62</td>
+      <td>3.4</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>65.82</td>
+      <td>61.97</td>
+      <td>3.8</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>68.04</td>
+      <td>63.36</td>
+      <td>4.7</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>63.75</td>
+      <td>60.64</td>
+      <td>3.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Random Forest (RF)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 3 to 5 % higher values</b> for the metrics <b>Accuracy, F1-Score, Recall and Precision</b>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.2-offer-2">5.5.2 offer 2<a class="anchor-link" href="#5.5.2-offer-2">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">RF</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">RF</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">rf_2_d</span><span class="p">,</span> <span class="n">acc_rf_2_d</span><span class="p">,</span> <span class="n">f1_rf_2_d</span><span class="p">,</span> <span class="n">r_rf_2_d</span><span class="p">,</span> <span class="n">p_rf_2_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">X2_train</span><span class="p">,</span> <span class="n">X2_test</span><span class="p">,</span> <span class="n">y2_train</span><span class="p">,</span> <span class="n">y2_test</span><span class="p">)</span>
+<span class="n">rf_2_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_rf_2_d</span><span class="p">,</span> <span class="n">f1_rf_2_d</span><span class="p">,</span> <span class="n">r_rf_2_d</span><span class="p">,</span> <span class="n">p_rf_2_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_2_RF</span> <span class="o">=</span> <span class="n">offer_2</span><span class="p">[[</span><span class="s2">&quot;RF&quot;</span><span class="p">]]</span>
+<span class="n">offer_2_RF</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_2_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf_2_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_2_RF</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_2_RF</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_2_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 2 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_2_RF</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 2 - confusion matrix:
+[[388 150]
+ [192 373]] 
+
+Offer 2 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.67      0.72      0.69       538
+           1       0.71      0.66      0.69       565
+
+    accuracy                           0.69      1103
+   macro avg       0.69      0.69      0.69      1103
+weighted avg       0.69      0.69      0.69      1103
+
+Offer 2: Accuracy: 68.99 % | F1-score: 68.57 % 
+        Recall: 66.02 % | Precision: 71.32 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 2 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>71.26</td>
+      <td>68.99</td>
+      <td>2.3</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>71.10</td>
+      <td>68.57</td>
+      <td>2.5</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>69.03</td>
+      <td>66.02</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>73.31</td>
+      <td>71.32</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Random Forest (RF)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 2 to 3 % higher values</b> for the metrics <b>Accuracy, F1-Score, Recall and Precision</b>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.3-offer-4">5.5.3 offer 4<a class="anchor-link" href="#5.5.3-offer-4">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">RF</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">RF</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">rf_4_d</span><span class="p">,</span> <span class="n">acc_rf_4_d</span><span class="p">,</span> <span class="n">f1_rf_4_d</span><span class="p">,</span> <span class="n">r_rf_4_d</span><span class="p">,</span> <span class="n">p_rf_4_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">X4_train</span><span class="p">,</span> <span class="n">X4_test</span><span class="p">,</span> <span class="n">y4_train</span><span class="p">,</span> <span class="n">y4_test</span><span class="p">)</span>
+<span class="n">rf_4_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_rf_4_d</span><span class="p">,</span> <span class="n">f1_rf_4_d</span><span class="p">,</span> <span class="n">r_rf_4_d</span><span class="p">,</span> <span class="n">p_rf_4_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_4_RF</span> <span class="o">=</span> <span class="n">offer_4</span><span class="p">[[</span><span class="s2">&quot;RF&quot;</span><span class="p">]]</span>
+<span class="n">offer_4_RF</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_4_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf_4_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_4_RF</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_4_RF</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_4_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 4 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_4_RF</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 4 - confusion matrix:
+[[455 183]
+ [236 235]] 
+
+Offer 4 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.66      0.71      0.68       638
+           1       0.56      0.50      0.53       471
+
+    accuracy                           0.62      1109
+   macro avg       0.61      0.61      0.61      1109
+weighted avg       0.62      0.62      0.62      1109
+
+Offer 4: Accuracy: 62.22 % | F1-score: 52.87 % 
+        Recall: 49.89 % | Precision: 56.22 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 4 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>63.39</td>
+      <td>62.22</td>
+      <td>1.2</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>52.90</td>
+      <td>52.87</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>48.41</td>
+      <td>49.89</td>
+      <td>-1.5</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>58.31</td>
+      <td>56.22</td>
+      <td>2.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Random Forest (RF)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 0 to 1 % higher values</b> for the metrics <b>Accuracy</b> and <b>F1-Score</b>. For <b>Recall</b> we have a deterioration of <b>appr. 1 %</b> and for <b>Precision</b> we have an <b>appr. 2 %</b> higher value. Furthermore we can observe that the class imbalance increases.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.4-offer-5">5.5.4 offer 5<a class="anchor-link" href="#5.5.4-offer-5">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">DT</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">DT</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">dt_5_d</span><span class="p">,</span> <span class="n">acc_dt_5_d</span><span class="p">,</span> <span class="n">f1_dt_5_d</span><span class="p">,</span> <span class="n">r_dt_5_d</span><span class="p">,</span> <span class="n">p_dt_5_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">X5_train</span><span class="p">,</span> <span class="n">X5_test</span><span class="p">,</span> <span class="n">y5_train</span><span class="p">,</span> <span class="n">y5_test</span><span class="p">)</span>
+<span class="n">dt_5_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_dt_5_d</span><span class="p">,</span> <span class="n">f1_dt_5_d</span><span class="p">,</span> <span class="n">r_dt_5_d</span><span class="p">,</span> <span class="n">p_dt_5_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_5_DT</span> <span class="o">=</span> <span class="n">offer_5</span><span class="p">[[</span><span class="s2">&quot;DT&quot;</span><span class="p">]]</span>
+<span class="n">offer_5_DT</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;DT&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_5_DT</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt_5_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_5_DT</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_5_DT</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_5_DT</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 5 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_5_DT</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 5 - confusion matrix:
+[[619 216]
+ [191  92]] 
+
+Offer 5 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.76      0.74      0.75       835
+           1       0.30      0.33      0.31       283
+
+    accuracy                           0.64      1118
+   macro avg       0.53      0.53      0.53      1118
+weighted avg       0.65      0.64      0.64      1118
+
+Offer 5: Accuracy: 63.6 % | F1-score: 31.13 % 
+        Recall: 32.51 % | Precision: 29.87 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 5 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>76.21</td>
+      <td>63.60</td>
+      <td>12.6</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>24.43</td>
+      <td>31.13</td>
+      <td>-6.7</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>15.19</td>
+      <td>32.51</td>
+      <td>-17.3</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>62.32</td>
+      <td>29.87</td>
+      <td>32.4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Decision Tree (DT)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 13 % higher value</b> for the metric <b>Accuracy</b>. For <b>F1-Score</b> and <b>Recall</b> we have a deterioration of <b>7 %</b> respectively <b>17 %</b>. For <b>Precision</b> we have <b>appr. 32 %</b> higher value. Furthermore we can observe that the class imbalance increases.</p>
+<p><p>In this case it is advisible to go one step back and tune the algorithm once again with slightly different parameters using GridSearchCV to get better metrics. This won't be done in this analysis.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.5-offer-6">5.5.5 offer 6<a class="anchor-link" href="#5.5.5-offer-6">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">SVM</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">SVM</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">svm_6_d</span><span class="p">,</span> <span class="n">acc_svm_6_d</span><span class="p">,</span> <span class="n">f1_svm_6_d</span><span class="p">,</span> <span class="n">r_svm_6_d</span><span class="p">,</span> <span class="n">p_svm_6_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">X6_train</span><span class="p">,</span> <span class="n">X6_test</span><span class="p">,</span> <span class="n">y6_train</span><span class="p">,</span> <span class="n">y6_test</span><span class="p">)</span>
+<span class="n">svm_6_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_svm_6_d</span><span class="p">,</span> <span class="n">f1_svm_6_d</span><span class="p">,</span> <span class="n">r_svm_6_d</span><span class="p">,</span> <span class="n">p_svm_6_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_6_SVM</span> <span class="o">=</span> <span class="n">offer_6</span><span class="p">[[</span><span class="s2">&quot;SVM&quot;</span><span class="p">]]</span>
+<span class="n">offer_6_SVM</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;SVM&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_6_SVM</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">svm_6_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_6_SVM</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_6_SVM</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_6_SVM</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 6 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_6_SVM</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 6 - confusion matrix:
+[[ 15 264]
+ [ 21 802]] 
+
+Offer 6 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.42      0.05      0.10       279
+           1       0.75      0.97      0.85       823
+
+    accuracy                           0.74      1102
+   macro avg       0.58      0.51      0.47      1102
+weighted avg       0.67      0.74      0.66      1102
+
+Offer 6: Accuracy: 74.14 % | F1-score: 84.91 % 
+        Recall: 97.45 % | Precision: 75.23 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 6 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>74.86</td>
+      <td>74.14</td>
+      <td>0.7</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>84.94</td>
+      <td>84.91</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>94.90</td>
+      <td>97.45</td>
+      <td>-2.5</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>76.87</td>
+      <td>75.23</td>
+      <td>1.6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Support Vector Machines (SVM)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 0 to 1 % higher values</b> for the metrics <b>Accuracy</b> and <b>F1-Score</b>. For <b>Recall</b> we have a deterioration of <b>appr. 2 %</b> and for <b>Precision</b> we have an <b>appr. 2 %</b> higher value. Furthermore we can observe that the class imbalance decreases.</p>
+<p><p>In this case we have done better with best parameters as we have a higher Accuracy and the class imbalance decreased compared to the default parameters.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.6-offer-7">5.5.6 offer 7<a class="anchor-link" href="#5.5.6-offer-7">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">GNB</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">GaussianNB</span><span class="p">(),</span> <span class="n">cv</span><span class="o">=</span><span class="n">GNB</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">gnb_7_d</span><span class="p">,</span> <span class="n">acc_gnb_7_d</span><span class="p">,</span> <span class="n">f1_gnb_7_d</span><span class="p">,</span> <span class="n">r_gnb_7_d</span><span class="p">,</span> <span class="n">p_gnb_7_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">X7_train</span><span class="p">,</span> <span class="n">X7_test</span><span class="p">,</span> <span class="n">y7_train</span><span class="p">,</span> <span class="n">y7_test</span><span class="p">)</span>
+<span class="n">gnb_7_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_gnb_7_d</span><span class="p">,</span> <span class="n">f1_gnb_7_d</span><span class="p">,</span> <span class="n">r_gnb_7_d</span><span class="p">,</span> <span class="n">p_gnb_7_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_7_GNB</span> <span class="o">=</span> <span class="n">offer_7</span><span class="p">[[</span><span class="s2">&quot;GNB&quot;</span><span class="p">]]</span>
+<span class="n">offer_7_GNB</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;GNB&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_7_GNB</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gnb_7_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_7_GNB</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_7_GNB</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_7_GNB</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 7 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_7_GNB</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 7 - confusion matrix:
+[[142 163]
+ [117 687]] 
+
+Offer 7 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.55      0.47      0.50       305
+           1       0.81      0.85      0.83       804
+
+    accuracy                           0.75      1109
+   macro avg       0.68      0.66      0.67      1109
+weighted avg       0.74      0.75      0.74      1109
+
+Offer 7: Accuracy: 74.75 % | F1-score: 83.07 % 
+        Recall: 85.45 % | Precision: 80.82 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 7 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>74.75</td>
+      <td>74.75</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>83.07</td>
+      <td>83.07</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>85.45</td>
+      <td>85.45</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>80.82</td>
+      <td>80.82</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Gaussian Naive Bayes (GNB)</b>. There is no hyperparameter tuning possible for this classifier and therefore The effect of hyperparameter tuning for this algorithm the metrics <b>Accuracy, F1-Score, Recall and Precision</b> remain the same.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.7-offer-9">5.5.7 offer 9<a class="anchor-link" href="#5.5.7-offer-9">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">KNN</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KNN</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span> 
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">knn_9_d</span><span class="p">,</span> <span class="n">acc_knn_9_d</span><span class="p">,</span> <span class="n">f1_knn_9_d</span><span class="p">,</span> <span class="n">r_knn_9_d</span><span class="p">,</span> <span class="n">p_knn_9_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">X9_train</span><span class="p">,</span> <span class="n">X9_test</span><span class="p">,</span> <span class="n">y9_train</span><span class="p">,</span> <span class="n">y9_test</span><span class="p">)</span>
+<span class="n">knn_9_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_knn_9_d</span><span class="p">,</span> <span class="n">f1_knn_9_d</span><span class="p">,</span> <span class="n">r_knn_9_d</span><span class="p">,</span> <span class="n">p_knn_9_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_9_KNN</span> <span class="o">=</span> <span class="n">offer_9</span><span class="p">[[</span><span class="s2">&quot;KNN&quot;</span><span class="p">]]</span>
+<span class="n">offer_9_KNN</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;KNN&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_9_KNN</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">knn_9_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_9_KNN</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_9_KNN</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_9_KNN</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 9 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_9_KNN</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 9 - confusion matrix:
+[[175 204]
+ [156 554]] 
+
+Offer 9 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.53      0.46      0.49       379
+           1       0.73      0.78      0.75       710
+
+    accuracy                           0.67      1089
+   macro avg       0.63      0.62      0.62      1089
+weighted avg       0.66      0.67      0.66      1089
+
+Offer 9: Accuracy: 66.94 % | F1-score: 75.48 % 
+        Recall: 78.03 % | Precision: 73.09 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 9 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>72.54</td>
+      <td>66.94</td>
+      <td>5.6</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>80.26</td>
+      <td>75.48</td>
+      <td>4.8</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>85.63</td>
+      <td>78.03</td>
+      <td>7.6</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>75.53</td>
+      <td>73.09</td>
+      <td>2.4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>K Nearest Neighbor (KNN)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 5 to 6 % higher values</b> for the metrics <b>Accuracy</b> and <b>F1-Score</b>. For <b>Recall</b> and <b>Precision</b> we have <b>appr. 8 %</b> respectively <b>appr. 2 %</b> higher values.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.8-offer-10">5.5.8 offer 10<a class="anchor-link" href="#5.5.8-offer-10">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### define parameters and classifier for best algorithm with default parameters</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">RF</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">RF</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1">### train classifier, predict on test set and compute evaluation metrics</span>
+<span class="n">rf_10_d</span><span class="p">,</span> <span class="n">acc_rf_10_d</span><span class="p">,</span> <span class="n">f1_rf_10_d</span><span class="p">,</span> <span class="n">r_rf_10_d</span><span class="p">,</span> <span class="n">p_rf_10_d</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">X10_train</span><span class="p">,</span> <span class="n">X10_test</span><span class="p">,</span> <span class="n">y10_train</span><span class="p">,</span> <span class="n">y10_test</span><span class="p">)</span>
+<span class="n">rf_10_default_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">acc_rf_10_d</span><span class="p">,</span> <span class="n">f1_rf_10_d</span><span class="p">,</span> <span class="n">r_rf_10_d</span><span class="p">,</span> <span class="n">p_rf_10_d</span><span class="p">]</span>
+
+
+<span class="c1">### create dataframe with column for best params</span>
+<span class="n">offer_10_RF</span> <span class="o">=</span> <span class="n">offer_10</span><span class="p">[[</span><span class="s2">&quot;RF&quot;</span><span class="p">]]</span>
+<span class="n">offer_10_RF</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="s2">&quot;best params&quot;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1">### create column for default params</span>
+<span class="n">offer_10_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf_10_default_params</span>
+<span class="c1">### create column for computing proportion of improvement of hyperparameter tuning with GridSearchCV</span>
+<span class="n">offer_10_RF</span><span class="p">[</span><span class="s2">&quot;improvement [%]&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">offer_10_RF</span><span class="p">[</span><span class="s2">&quot;best params&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">offer_10_RF</span><span class="p">[</span><span class="s2">&quot;default params&quot;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Offer 10 - effect of hyperparameter tuning &quot;</span><span class="p">,</span> <span class="n">offer_10_RF</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>#######################################################
+Offer 10 - confusion matrix:
+[[451 165]
+ [246 234]] 
+
+Offer 10 - classification report:
+              precision    recall  f1-score   support
+
+           0       0.65      0.73      0.69       616
+           1       0.59      0.49      0.53       480
+
+    accuracy                           0.62      1096
+   macro avg       0.62      0.61      0.61      1096
+weighted avg       0.62      0.62      0.62      1096
+
+Offer 10: Accuracy: 62.5 % | F1-score: 53.24 % 
+        Recall: 48.75 % | Precision: 58.65 % 
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_text output_subarea ">
+<pre>&#39;Offer 10 - effect of hyperparameter tuning &#39;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>classifier</th>
+      <th>best params</th>
+      <th>default params</th>
+      <th>improvement [%]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>accuracy</th>
+      <td>64.23</td>
+      <td>62.50</td>
+      <td>1.7</td>
+    </tr>
+    <tr>
+      <th>f1-score</th>
+      <td>53.99</td>
+      <td>53.24</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>recall</th>
+      <td>47.92</td>
+      <td>48.75</td>
+      <td>-0.8</td>
+    </tr>
+    <tr>
+      <th>precision</th>
+      <td>61.83</td>
+      <td>58.65</td>
+      <td>3.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>The classification algorithm with best predictive performance is <b>Random Forest (RF)</b>. The effect of hyperparameter tuning for this algorithm results in <b>appr. 1 to 2 % higher values</b> for the metrics <b>Accuracy</b> and <b>F1-Score</b>. For <b>Recall</b> we have a deterioration of <b>appr. 1 %</b> and for <b>Precision</b> we have an <b>appr. 3 %</b> higher value. Furthermore we can observe that the class imbalance increases.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="5.5.9-Summary-Hyperparameter-Tuning">5.5.9 Summary Hyperparameter Tuning<a class="anchor-link" href="#5.5.9-Summary-Hyperparameter-Tuning">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><p>We measured the effect of hyperparameter tuning by cross-validated grid-search (GridSearchCV). Below we summarize where we had success with parameter tuning and where it would be advisible to go one step back and tune the algorithm once again with slightly different parameters.</p>
+<ul>
+    <li>offer 1: <b>RF</b> - hyperparameter tuning was fully successful and increased metrics Accuracy, F1-Score, Recall and Precision by 3 to 5 %</li>
+    <li>offer 2: <b>RF</b> - hyperparameter tuning was fully successful and increased metrics Accuracy, F1-Score, Recall and Precision by 1 to 3 %</li>
+    <li>offer 4: <b>RF</b> - hyperparameter tuning was successful and increased metrics Accuracy, F1-Score and Precision by 0 to 2 %. Recall score decreased by 1 % which can be neglected</li>
+    <li>offer 5: <b>DT</b> - hyperparameter tuning was partially successful and increased metrics Accuracy and Precision by 13 and 32 %. F1 and Recall score decreased by 7 and 17 %. It has to be considered that going back and tune the algorithm once again with slightly different parameters would get us better metrics</li>
+    <li>offer 6: <b>SVM</b>  - hyperparameter tuning was modestly successful and increased metrics Accuracy, F1-Score and Precision by 0 to 2 %. Recall score decreased by 2 % which can be neglected</li>
+    <li>offer 7: <b>GNB</b> - no hyperparameter tuning possible for this classifier</li>
+    <li>offer 9: <b>KNN</b>  - hyperparameter tuning was fully successful and increased metrics Accuracy, F1-Score, Recall and Precision by 2 to 8 %</li>
+    <li>offer 10: <b>RF</b> - hyperparameter tuning was successful and increased metrics Accuracy, F1-Score and Precision by 1 to 3 %. Recall score decreased by 1 % which can be neglected</li>
+</ul><p><p>Thus the results of the hyperparameter tuning are satisfying for algorithms RF, SVM, GNB and KNN. For the Decision Tree (DT) we should consider to tune the algorithm once again with slightly different parameters.</p>
+
 </div>
 </div>
 </div>
@@ -19791,7 +21081,7 @@ Wall time: 1min 23s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### create dataframe with new customer data for prediction promomtion success</span>
@@ -19809,7 +21099,7 @@ Wall time: 1min 23s
      <span class="s2">&quot;income year (USD)&quot;</span><span class="p">:</span> <span class="n">income_year</span><span class="p">,</span>
      <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="n">gender</span><span class="p">,</span>
      <span class="p">},</span> <span class="n">index</span> <span class="o">=</span> <span class="n">customer_id</span><span class="p">)</span>
-<span class="n">customer_data</span>
+<span class="n">display</span><span class="p">(</span><span class="n">customer_data</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -19822,11 +21112,11 @@ Wall time: 1min 23s
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[66]:</div>
+    <div class="prompt"></div>
 
 
 
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="output_html rendered_html output_subarea ">
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -20236,7 +21526,7 @@ Wall time: 1min 23s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">call</span>
@@ -20253,7 +21543,7 @@ Wall time: 1min 23s
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[68]:</div>
+    <div class="prompt output_prompt">Out[72]:</div>
 
 
 
